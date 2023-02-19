@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>UserProfile</title>
+</head>
+<body>
+<h1 style="color: darkred">User Profile</h1>
+<p th:text="'Username: ' + ${user.getUsername()}">VALUE</p>
+<p th:text="'Name: ' + ${user.getName()}">VALUE</p>
+<p th:text="'Surname: ' + ${user.getSurname()}">VALUE</p>
+<p th:text="'Email: ' + ${user.getEmail()}">VALUE</p>
+<p th:text="'Password: ' + ${user.getPassword()}">VALUE</p>
+<hr/>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Want to logout?" style="background-color:#53760D;color:#D0F18F">
+</form>
+</body>
+</html>

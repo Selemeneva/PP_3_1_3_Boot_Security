@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Spring Security Example</title>
+</head>
+<body>
+<u><h1>Welcome to Index PAGE!</h1></u>
+
+<h2>You can test this application after login as a:</h2>
+<h2 style="color: darkred">ADMIN (username: admin; password: admin)</h2>
+<h2 style="color: darkblue">USER (username: user; password: user)</h2>
+<hr/>
+<br/>
+<form name="login" th:action="@{/userList}" method="get">
+    <input type="submit" style="font: bold 20px Arial" value="Press to start">
+</form>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Page</title>
+</head>
+<body>
+<div>
+  <table border="1">
+    <caption>
+      <h2 style="color: darkred">You have access to your personal page:</h2>
+    </caption>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Username</th>
+      <th scope="col">Name</th>
+      <th scope="col">Surname</th>
+      <th scope="col">Email</th>
+      <th scope="col">Personal page</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+      <td th:text="${user.getId()}">
+      <td th:text="${user.getUsername()}">
+      <td th:text="${user.getName()}"/>
+      <td th:text="${user.getSurname()}"/>
+      <td th:text="${user.getEmail()}"/>
+      <td>
+        <a th:href="@{/user/show/{id}(id=${user.getId()})}">Personal page</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <br/>
+   <form th:action="@{/logout}" method="post">
+    <input type="submit" value="Want to logout?" style="background-color:#53760D;color:#D0F18F">
+  </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div>
+
+    <table border="1">
+        <caption>
+            <h1 style="color: darkred">List of USERS</h1>
+        </caption>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Username</th>
+            <th scope="col">Password</th>
+            <th scope="col">Name</th>
+            <th scope="col">Surname</th>
+            <th scope="col">Email</th>
+            <th scope="col">Roles</th>
+            <th scope="col">Personal data</th>
+        </tr>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.getId()}">
+            <td th:text="${user.getUsername()}">
+            <td th:text="${user.getPassword()}">
+            <td th:text="${user.getName()}"/>
+            <td th:text="${user.getSurname()}"/>
+            <td th:text="${user.getEmail()}"/>
+            <td>
+                <div th:each="role:${user.getRoles()}">[[${role.roleWithoutPrefix()}]]</div>
+            </td>
+            <td>
+                <a th:href="@{/admin/show/{id}(id=${user.getId()})}">Personal data</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <br/>
+    <hr/>
+    <a href="/admin/new">Press to ADD new user</a>
+    <hr/>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Want to logout?"  style="background-color:#53760D;color:#D0F18F; font-size : 15px">
+    </form>
+</div>
+</body>
+</html>
