@@ -4,7 +4,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 import ru.kata.spring.boot_security.demo.model.User;
 import javax.persistence.EntityManager;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {
@@ -21,8 +24,8 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<User> getList() {
-        return entityManager.createQuery("from User", User.class).getResultList();
+    public Set<User> getList() {
+        return entityManager.createQuery("from User", User.class).getResultList().stream().collect(Collectors.toSet());
     }
 
     @Override

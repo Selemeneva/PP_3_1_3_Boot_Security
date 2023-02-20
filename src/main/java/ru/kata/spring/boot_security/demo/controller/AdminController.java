@@ -14,13 +14,11 @@ import ru.kata.spring.boot_security.demo.service.UserService;
 public class AdminController {
     private final UserService userService;
     private final RoleService roleService;
-    private final PasswordEncoder passwordEncoder;
 
-    public AdminController(UserService userService, RoleService roleService, PasswordEncoder passwordEncoder) {
+    public AdminController(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
-        this.passwordEncoder = passwordEncoder;
-    }
+        }
 
     @GetMapping()
     public String allUsers(ModelMap model) {
@@ -37,13 +35,12 @@ public class AdminController {
     @GetMapping("/new")
     public String newUser(@ModelAttribute User user, Model model) {
         model.addAttribute("user", user);
-        model.addAttribute("roles", userService.getAllRoles());
+        model.addAttribute("roles", roleService.getAllRoles());
         return "new";
     }
 
     @PostMapping()
     public String create(@ModelAttribute("user") User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.addUser(user);
         return "redirect:/admin";
     }

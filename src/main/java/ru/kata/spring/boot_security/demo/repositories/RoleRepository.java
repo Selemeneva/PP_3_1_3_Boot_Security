@@ -3,6 +3,7 @@ package ru.kata.spring.boot_security.demo.repositories;
 import ru.kata.spring.boot_security.demo.model.Role;
 
 import java.util.List;
+import java.util.Set;
 
 
 public interface RoleRepository {
@@ -10,15 +11,15 @@ public interface RoleRepository {
 
     Role getRole(Long id);
 
-    List<Role> getList();
+    Set<Role> getList();
 
-    List<Role> getAllRoles();
+    Set<Role> getAllRoles();
 
     void deleteRole(Long id);
 
     void editRole(Role role);
 
-    List<Role> listByName(List<String> name);
+    Set<Role> listByName(Set<String> name);
 
     Role findByName(String name);
 }

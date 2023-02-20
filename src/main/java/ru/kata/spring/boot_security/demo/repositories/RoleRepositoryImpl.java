@@ -3,6 +3,8 @@ import org.springframework.stereotype.Repository;
 import ru.kata.spring.boot_security.demo.model.Role;
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Repository
 public class RoleRepositoryImpl implements RoleRepository {
@@ -19,13 +21,13 @@ public class RoleRepositoryImpl implements RoleRepository {
         return true;
     }
     @Override
-    public List<Role> getList() {
-        return entityManager.createQuery("select s from Role s", Role.class).getResultList();
+    public Set<Role> getList() {
+       return (entityManager.createQuery("select s from Role s", Role.class).getResultList()).stream().collect(Collectors.toSet());
     }
 
     @Override
-    public List<Role> getAllRoles() {
-        return entityManager.createQuery("from Role", Role.class).getResultList();
+    public Set<Role> getAllRoles() {
+        return (entityManager.createQuery("from Role", Role.class).getResultList()).stream().collect(Collectors.toSet());
     }
 
     @Override
@@ -43,10 +45,12 @@ public class RoleRepositoryImpl implements RoleRepository {
         entityManager.merge(role);
     }
     @Override
-    public List<Role> listByName(List<String> name) {
+    public Set<Role> listByName(Set<String> name) {
         return  entityManager.createQuery("select u FROM Role u WHERe u.role in (:id)", Role.class)
                 .setParameter("id", name)
-                .getResultList();
+                .getResultList()
+                .stream()
+                .collect(Collectors.toSet());
     }
     @Override
     public Role findByName(String name) {

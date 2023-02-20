@@ -1,4 +1,4 @@
-package ru.kata.spring.boot_security.demo.default_users;
+package ru.kata.spring.boot_security.demo.util;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -9,16 +9,18 @@ import ru.kata.spring.boot_security.demo.service.UserService;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Component
-public class DefaultUsers {
+public class Util {
     private final UserService userService;
     private final RoleServiceImpl roleService;
 
 
-    public DefaultUsers(UserService userService, RoleServiceImpl roleService) {
+    public Util(UserService userService, RoleServiceImpl roleService) {
         this.userService = userService;
         this.roleService = roleService;
     }
@@ -27,8 +29,8 @@ public class DefaultUsers {
     public void addFirstUsers() {
         Role roleAdmin = new Role("ROLE_ADMIN");
         Role roleUser = new Role("ROLE_USER");
-        List<Role> adminSet = new ArrayList<>();
-        List<Role> userSet = new ArrayList<>();
+        Set<Role> adminSet = new HashSet<>();
+        Set<Role> userSet = new HashSet<>();
 
         roleService.add(roleAdmin);
         roleService.add(roleUser);
