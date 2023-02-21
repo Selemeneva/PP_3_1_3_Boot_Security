@@ -1,6 +1,5 @@
 package ru.kata.spring.boot_security.demo.util;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
@@ -8,9 +7,7 @@ import ru.kata.spring.boot_security.demo.service.RoleServiceImpl;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 
@@ -18,7 +15,6 @@ import java.util.Set;
 public class Util {
     private final UserService userService;
     private final RoleServiceImpl roleService;
-
 
     public Util(UserService userService, RoleServiceImpl roleService) {
         this.userService = userService;
@@ -38,9 +34,9 @@ public class Util {
         adminSet.add(roleAdmin);
         adminSet.add(roleUser);
         userSet.add(roleUser);
-        User user = new User("user", new BCryptPasswordEncoder().encode("user"),
+        User user = new User("user", "user",
                 "Jane", "Smith", "user@mail.ru", userSet);
-        User admin = new User("admin", new BCryptPasswordEncoder().encode("admin"),
+        User admin = new User("admin", "admin",
                 "John", "Smith", "admin@mail.ru", adminSet);
 
         userService.addUser(user);
